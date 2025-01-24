@@ -25,14 +25,14 @@ const DateRangePicker: React.FC<PropsType> = ({ predefinedRanges }) => {
     startDate: null,
     endDate: null,
   });
-  const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
+
   const [dateValue, setDateValue] = useState<string>('YYYY/MM/DD ~YYYY/MM/DD');
   const [showCalender, setShowCalender] = useState<boolean>(false);
   const [weekend, setWeekends] = useState<string[]>([]);
 
   const formatDate = (date: Date): string => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}/${month}/${day}`;
@@ -107,15 +107,6 @@ const DateRangePicker: React.FC<PropsType> = ({ predefinedRanges }) => {
     setShowCalender(true);
   };
 
-  const onDateChange = (e: any) => {
-    console.log(e.target.value);
-    let value = e.target.value;
-    const [startDate, endDate] = value.split('~');
-    console.log(startDate, endDate);
-    setSelectedRange({ startDate, endDate });
-    setDateValue(value);
-  };
-
   return (
     <>
       {selectedRange.startDate && selectedRange.endDate && (
@@ -152,11 +143,11 @@ const DateRangePicker: React.FC<PropsType> = ({ predefinedRanges }) => {
         placeholder="Select Date"
         value={dateValue}
         onClick={() => onInputClick()}
-        // onChange={(e) => onDateChange(e)}
       />
       {showCalender && (
         <div className={styles.dateRangePicker}>
           <div className={styles.calendars}>
+            {/* left Calender */}
             <Calendar
               isWeekend={isWeekend}
               selectedRange={selectedRange}
@@ -166,7 +157,7 @@ const DateRangePicker: React.FC<PropsType> = ({ predefinedRanges }) => {
               otherCalMonth={rightCalenderMonth}
               setOtherCalMonth={setRightCalenderMonth}
             />
-
+            {/* right calendar */}
             <Calendar
               isWeekend={isWeekend}
               selectedRange={selectedRange}
