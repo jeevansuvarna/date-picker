@@ -114,12 +114,10 @@ const Calendar: React.FC<CalendarProps> = ({
     return false;
   };
 
-  // Make empty spaces for days before the 1st
   for (let i = 0; i < startingDate; i++) {
     days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
   }
 
-  // Generate days for the month
   for (let day = 1; day <= totalDays; day++) {
     const dayCopy = new Date(currentMonth);
     dayCopy.setDate(day);
